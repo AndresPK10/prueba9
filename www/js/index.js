@@ -1,0 +1,54 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+var app = {
+    // Application Constructor
+    initialize: function() {
+        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+    },
+
+    // deviceready Event Handler
+    //
+    // Bind any cordova events here. Common events are:
+    // 'pause', 'resume', etc.
+    onDeviceReady: function() {
+        document.getElementById("boton").addEventListener('click', showbrowser);
+        function showbrowser(){
+        var ref = cordova.InAppBrowser.open('https://analytics.zoho.com/ZDBDataSheetView.cc?DBID=1861580000000002121', '_blank', 'location=yes');
+        }
+        console.log('deviceready');
+        var p = document.querySelector('#device p');
+        p.innerHTML = device.cordova + '<br/>' + device.platform + '<br/>'+ device.model + '<br/>' + device.uuid + '<br/>' + device.version + '<br/>' + device.manufacturer + '<br/>' + device.isVirtual + '<br/>' + device.serial + '<br/>';
+   
+    },
+
+    // Update DOM on a Received Event
+    receivedEvent: function(id) {
+    window.addEventListener("batterystatus", onBatteryStatus, false);
+
+    function onBatteryStatus(status) {
+    console.log("Level: " + status.level + " isPlugged: " + status.isPlugged);
+    document.getElementById("Level").innerHTML = status.level;
+    document.getElementById("isPlugged").innerHTML = status.isPlugged;
+}
+
+    }
+};
+
+
+app.initialize();
